@@ -1,0 +1,2465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Kenya Host| Premium Web Hosting Solutions</title>
+    <meta name="description" content="Kenya's premier cloud hosting provider. Fast, secure, and reliable web hosting with local support.">
+    
+    <style>
+        /* ===================== ROOT VARIABLES (Same Theme) ===================== */
+        :root {
+            --bg: #05080f;
+            --panel: #0c1328;
+            --glass: rgba(255, 255, 255, 0.08);
+            --accent: #00ffd5;
+            --accent2: #00aaff;
+            --danger: #ff4d4d;
+            --text: #e6f1ff;
+            --text-muted: #9fb0ff;
+            --gradient: linear-gradient(135deg, var(--accent), var(--accent2));
+            --success: #00ff88;
+            --warning: #ffaa00;
+        }
+
+        /* ===================== GLOBAL STYLES ===================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: radial-gradient(circle at top, #0f1a35, #020409);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===================== CUSTOM SCROLLBAR ===================== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent2);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* ===================== NAVIGATION ===================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(5, 8, 15, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 255, 213, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .btn-login {
+            background: var(--gradient);
+            color: var(--bg) !important;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .btn-login::after {
+            display: none;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===================== MAIN CONTENT ===================== */
+        main {
+            margin-top: 70px;
+        }
+
+        section {
+            padding: 5rem 10%;
+        }
+
+        /* ===================== PAGE HEADER ===================== */
+        .page-header {
+            text-align: center;
+            padding: 8rem 10% 3rem;
+            background: linear-gradient(180deg, rgba(0,255,213,0.1) 0%, transparent 100%);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===================== HERO SECTION ===================== */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 213, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .floating-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 255, 213, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ===================== BUTTONS ===================== */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--bg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 213, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* ===================== SERVICES SECTION ===================== */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 213, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 255, 213, 0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+        }
+
+        /* ===================== PRICING SECTION ===================== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 213, 0.1);
+        }
+
+        .pricing-card.popular {
+            transform: scale(1.05);
+            border: 2px solid var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 255, 213, 0.2);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            color: var(--bg);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .price {
+            font-size: 3rem;
+            color: var(--accent);
+            margin: 1rem 0;
+        }
+
+        .price small {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .features-list li {
+            margin: 0.5rem 0;
+            color: var(--text-muted);
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--accent);
+            margin-right: 0.5rem;
+        }
+
+        /* ===================== FEATURES SECTION ===================== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 213, 0.1);
+        }
+
+        .feature-item h3 {
+            color: var(--accent);
+            margin: 1rem 0;
+        }
+
+        /* ===================== NEW FEATURES GRID (8 TOTAL) ===================== */
+        .new-features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .new-feature-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            border: 1px solid rgba(0, 255, 213, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .new-feature-card:hover {
+            transform: translateX(10px);
+            border-color: var(--accent);
+        }
+
+        .feature-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+
+        .feature-content h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-content p {
+            color: var(--text-muted);
+        }
+
+        .feature-tag {
+            display: inline-block;
+            background: var(--gradient);
+            color: var(--bg);
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* ===================== NEW ADDITIONAL FEATURES ===================== */
+        .additional-features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .additional-feature {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0,255,213,0.1), rgba(0,170,255,0.1));
+            border-radius: 20px;
+            border: 1px solid rgba(0,255,213,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .additional-feature:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .feature-icon-large {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-progress {
+            margin-top: 1rem;
+        }
+
+        .feature-progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .feature-progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+
+        /* ===================== ABOUT PAGE STYLES ===================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .about-stat {
+            text-align: center;
+        }
+
+        .about-stat .number {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            border-left: 2px solid var(--accent);
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .timeline-item .year {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===================== BLOG PAGE STYLES ===================== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .blog-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 255, 213, 0.1);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
+            opacity: 0.8;
+            position: relative;
+        }
+
+        .blog-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--gradient);
+            color: var(--bg);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-content h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .blog-content p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-widget {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-widget h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0, 255, 213, 0.2);
+        }
+
+        .popular-post {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .popular-post img {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
+            border-radius: 10px;
+        }
+
+        .popular-post h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .popular-post span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: rgba(255,255,255,0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        /* ===================== CAREERS PAGE STYLES ===================== */
+        .careers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .job-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 255, 213, 0.1);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .job-header h3 {
+            color: var(--accent);
+        }
+
+        .job-type {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .job-location {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .job-requirements {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .job-requirements li {
+            color: var(--text-muted);
+            margin: 0.5rem 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .benefit-item {
+            background: var(--glass);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .benefit-item .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===================== AFFILIATE PROGRAM PAGE ===================== */
+        .affiliate-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .affiliate-stat {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass);
+            border-radius: 20px;
+        }
+
+        .affiliate-stat .number {
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .commission-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .commission-tier {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0,255,213,0.1), rgba(0,170,255,0.1));
+            border-radius: 20px;
+            border: 1px solid rgba(0,255,213,0.2);
+        }
+
+        .commission-tier h3 {
+            color: var(--accent);
+            font-size: 2rem;
+            margin: 1rem 0;
+        }
+
+        /* ===================== KNOWLEDGE BASE ===================== */
+        .knowledge-categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-count {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .knowledge-article {
+            background: var(--glass);
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0,255,213,0.1);
+        }
+
+        .knowledge-article h4 {
+            color: var(--accent);
+            margin: 0.5rem 0;
+        }
+
+        .article-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ===================== SERVER STATUS PAGE ===================== */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .status-card {
+            background: var(--glass);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0,255,213,0.1);
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .status-badge {
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-operational {
+            background: var(--success);
+            color: var(--bg);
+        }
+
+        .status-degraded {
+            background: var(--warning);
+            color: var(--bg);
+        }
+
+        .status-down {
+            background: var(--danger);
+            color: var(--bg);
+        }
+
+        .incident-list {
+            margin-top: 2rem;
+        }
+
+        .incident-item {
+            padding: 1rem;
+            border-left: 3px solid var(--accent);
+            background: rgba(255,255,255,0.05);
+            margin-bottom: 1rem;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .incident-time {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .uptime-chart {
+            height: 100px;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            margin: 2rem 0;
+        }
+
+        .uptime-bar {
+            flex: 1;
+            background: var(--success);
+            height: 80%;
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* ===================== NEW: REFERRAL SYSTEM ===================== */
+        .referral-code-box {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            color: var(--bg);
+            margin: 2rem 0;
+        }
+
+        .referral-code {
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 1rem 0;
+        }
+
+        .copy-button {
+            background: var(--bg);
+            color: var(--text);
+            border: none;
+            padding: 0.5rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .referral-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .referral-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--glass);
+            border-radius: 20px;
+        }
+
+        .referral-stat .number {
+            font-size: 2rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* ===================== CONTACT SECTION ===================== */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 3rem;
+            border: 1px solid rgba(0, 255, 213, 0.1);
+        }
+
+        .contact-info h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .contact-details {
+            margin: 2rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--bg);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 213, 0.2);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* ===================== FOOTER ===================== */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 4rem 10% 2rem;
+            border-top: 1px solid rgba(0, 255, 213, 0.1);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin: 0.5rem 0;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.5rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(0,255,213,0.2);
+            border-radius: 5px;
+            color: var(--text);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+        }
+
+        /* ===================== TOAST NOTIFICATION ===================== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--panel);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* ===================== LOADING SPINNER ===================== */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===================== RESPONSIVE DESIGN ===================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--panel);
+                flex-direction: column;
+                padding: 2rem;
+                border-bottom: 1px solid rgba(0, 255, 213, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+
+            .about-grid,
+            .blog-grid,
+            .careers-grid,
+            .new-features-grid,
+            .additional-features,
+            .affiliate-stats,
+            .commission-grid,
+            .knowledge-categories,
+            .knowledge-grid,
+            .status-grid,
+            .referral-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===================== NAVIGATION ===================== -->
+    <nav class="navbar">
+        <div class="logo" onclick="showPage('home')"></div>
+        <div class="nav-links" id="navLinks">
+            <a onclick="showPage('home')" class="active">Home</a>
+            <a onclick="showPage('about')">About Us</a>
+            <a onclick="showPage('blog')">Blog</a>
+            <a onclick="showPage('careers')">Careers</a>
+            <a onclick="showPage('affiliate')">Affiliate</a>
+            <a onclick="showPage('knowledge')">Knowledge</a>
+            <a onclick="showPage('status')">Status</a>
+            <a onclick="showPage('contact')">Contact</a>
+            <a onclick="openControlPanel()" class="btn-login">Control Panel</a>
+        </div>
+        <div class="mobile-menu" onclick="toggleMenu()">☰</div>
+    </nav>
+
+    <!-- ===================== HOME PAGE ===================== -->
+    <div id="home-page">
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>
+                    Power Your Website with<br>
+                    <span class="highlight">Kenya's Fastest Cloud</span>
+                </h1>
+                <p>Experience lightning-fast hosting with 99.9% uptime, local support, and enterprise-grade security. Perfect for businesses and developers in Kenya and beyond.</p>
+                <div>
+                    <a class="btn btn-primary" onclick="scrollToPricing()">Get Started Now</a>
+                    <a class="btn btn-outline" onclick="showPage('contact')">Talk to Sales</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>99.9%</h3>
+                        <p>Uptime Guarantee</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>Local Support</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1GB</h3>
+                        <p>Free Tier</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card">
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="width: 12px; height: 12px; background: #ff4d4d; border-radius: 50%;"></div>
+                        <div style="width: 12px; height: 12px; background: #ffd700; border-radius: 50%;"></div>
+                        <div style="width: 12px; height: 12px; background: #00ffd5; border-radius: 50%;"></div>
+                    </div>
+                    <div style="height: 10px; width: 100%; background: rgba(255,255,255,0.1); border-radius: 5px; margin: 1rem 0;">
+                        <div style="width: 75%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 5px;"></div>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <div style="flex:1; height: 60px; background: rgba(255,255,255,0.05); border-radius: 10px;"></div>
+                        <div style="flex:1; height: 60px; background: rgba(255,255,255,0.05); border-radius: 10px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services">
+            <h2 class="section-title">Our <span>Services</span></h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Web Hosting</h3>
+                    <p>Fast and reliable hosting with SSD storage, unlimited bandwidth, and free SSL certificates.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Cloud VPS</h3>
+                    <p>Scalable virtual private servers with root access and dedicated resources.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📧</div>
+                    <h3>Business Email</h3>
+                    <p>Professional email hosting with calendars, contacts, and 25GB storage per mailbox.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>SSL Certificates</h3>
+                    <p>Free Let's Encrypt SSL or premium certificates for e-commerce security.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💾</div>
+                    <h3>Automated Backups</h3>
+                    <p>Daily backups with one-click restore to keep your data safe.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>CDN Integration</h3>
+                    <p>Global content delivery network for faster loading worldwide.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8 NEW FEATURES SECTION (First 4) -->
+        <section>
+            <h2 class="section-title">Advanced <span>Features</span></h2>
+            <div class="new-features-grid">
+                <div class="new-feature-card">
+                    <div class="feature-number">01</div>
+                    <div class="feature-content">
+                        <h3>AI-Powered Security</h3>
+                        <p>Machine learning algorithms detect and block threats in real-time before they reach your website. Includes DDoS protection, malware scanning, and intrusion prevention.</p>
+                        <span class="feature-tag">NEW</span>
+                    </div>
+                </div>
+                <div class="new-feature-card">
+                    <div class="feature-number">02</div>
+                    <div class="feature-content">
+                        <h3>Edge Computing Network</h3>
+                        <p>Deploy your applications closer to your users with our global edge network. Reduce latency by up to 60% with 50+ edge locations worldwide.</p>
+                        <span class="feature-tag">BETA</span>
+                    </div>
+                </div>
+                <div class="new-feature-card">
+                    <div class="feature-number">03</div>
+                    <div class="feature-content">
+                        <h3>Auto-Scaling Infrastructure</h3>
+                        <p>Your resources automatically scale during traffic spikes. Pay only for what you use with our intelligent auto-scaling technology.</p>
+                        <span class="feature-tag">PREMIUM</span>
+                    </div>
+                </div>
+                <div class="new-feature-card">
+                    <div class="feature-number">04</div>
+                    <div class="feature-content">
+                        <h3>Green Hosting Initiative</h3>
+                        <p>100% carbon-neutral hosting powered by renewable energy. We plant a tree for every new customer. Join us in making the web greener.</p>
+                        <span class="feature-tag">ECO</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADDITIONAL 4 NEW FEATURES -->
+        <section>
+            <h2 class="section-title">More <span>Innovations</span></h2>
+            <div class="additional-features">
+                <div class="additional-feature">
+                    <div class="feature-icon-large">🤖</div>
+                    <h3>AI Website Builder</h3>
+                    <p>Create stunning websites in minutes with our AI-powered drag-and-drop builder. No coding required.</p>
+                    <div class="feature-progress">
+                        <small>Beta access: 75% open</small>
+                        <div class="feature-progress-bar">
+                            <div class="feature-progress-fill" style="width:75%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="additional-feature">
+                    <div class="feature-icon-large">📊</div>
+                    <h3>Real-time Analytics</h3>
+                    <p>Get instant insights about your visitors, traffic sources, and user behavior with live dashboards.</p>
+                    <div class="feature-progress">
+                        <small>Usage: 12,345 sites</small>
+                        <div class="feature-progress-bar">
+                            <div class="feature-progress-fill" style="width:60%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="additional-feature">
+                    <div class="feature-icon-large">🛒</div>
+                    <h3>E-commerce Suite</h3>
+                    <p>Built-in shopping cart, payment processing, and inventory management for online stores.</p>
+                    <div class="feature-progress">
+                        <small>Transactions: 50K+/month</small>
+                        <div class="feature-progress-bar">
+                            <div class="feature-progress-fill" style="width:90%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="additional-feature">
+                    <div class="feature-icon-large">📱</div>
+                    <h3>Mobile App Manager</h3>
+                    <p>Manage your hosting, domains, and files directly from your smartphone with our native app.</p>
+                    <div class="feature-progress">
+                        <small>App Store: 4.8 ★</small>
+                        <div class="feature-progress-bar">
+                            <div class="feature-progress-fill" style="width:95%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING SECTION -->
+        <section id="pricing">
+            <h2 class="section-title">Simple <span>Pricing</span></h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">0<small>/month</small></div>
+                    <ul class="features-list">
+                        <li>1 Website</li>
+                        <li>1GB SSD Storage</li>
+                        <li>2GB Bandwidth</li>
+                        <li>Free SSL Certificate</li>
+                        <li>24/7 Support</li>
+                    </ul>
+                    <a class="btn btn-outline btn-small" onclick="openControlPanel()">Get Started</a>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="popular-badge">MOST POPULAR</div>
+                    <h3>Basic</h3>
+                    <div class="price">500<small>/month</small></div>
+                    <ul class="features-list">
+                        <li>5 Websites</li>
+                        <li>5GB SSD Storage</li>
+                        <li>10GB Bandwidth</li>
+                        <li>Free SSL Certificate</li>
+                        <li>Daily Backups</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <a class="btn btn-primary btn-small" onclick="openControlPanel()">Choose Plan</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Pro</h3>
+                    <div class="price">1,500<small>/month</small></div>
+                    <ul class="features-list">
+                        <li>20 Websites</li>
+                        <li>20GB SSD Storage</li>
+                        <li>50GB Bandwidth</li>
+                        <li>Free SSL Certificate</li>
+                        <li>Daily Backups</li>
+                        <li>Priority Support</li>
+                        <li>Staging Environment</li>
+                    </ul>
+                    <a class="btn btn-outline btn-small" onclick="openControlPanel()">Choose Plan</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Business</h3>
+                    <div class="price">5,000<small>/month</small></div>
+                    <ul class="features-list">
+                        <li>Unlimited Websites</li>
+                        <li>1TB SSD Storage</li>
+                        <li>Unlimited Bandwidth</li>
+                        <li>Free SSL Certificate</li>
+                        <li>Hourly Backups</li>
+                        <li>24/7 Phone Support</li>
+                        <li>Dedicated IP</li>
+                    </ul>
+                    <a class="btn btn-outline btn-small" onclick="openControlPanel()">Choose Plan</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ORIGINAL FEATURES SECTION -->
+        <section>
+            <h2 class="section-title">Why Choose <span> Cloud Kenya Host Host</span></h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="service-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>SSD storage and optimized servers for maximum speed</p>
+                </div>
+                <div class="feature-item">
+                    <div class="service-icon">🔒</div>
+                    <h3>Secure by Default</h3>
+                    <p>Free SSL, DDoS protection, and regular security updates</p>
+                </div>
+                <div class="feature-item">
+                    <div class="service-icon">🇰🇪</div>
+                    <h3>Local Support</h3>
+                    <p>24/7 support in English and Swahili from Nairobi</p>
+                </div>
+                <div class="feature-item">
+                    <div class="service-icon">📱</div>
+                    <h3>Easy Management</h3>
+                    <p>Intuitive control panel with one-click installers</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===================== ABOUT PAGE ===================== -->
+    <div id="about-page" style="display: none;">
+        <div class="page-header">
+            <h1>About <span>Cloud Kenya Host</span></h1>
+            <p>Empowering Kenyan businesses with world-class cloud infrastructure since 2020</p>
+        </div>
+
+        <section>
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>Our Story</h2>
+                    <p>Founded in Nairobi in 2020, Cloud Kenya Host was born from a simple idea: Kenyan businesses deserve world-class hosting with local support. We saw a gap in the market for reliable, fast, and secure hosting that understands the unique needs of African businesses.</p>
+                    <p>Today, we're proud to serve thousands of customers across Kenya and East Africa, providing enterprise-grade infrastructure at affordable prices. Our team of experts works 24/7 to ensure your websites are always online, fast, and secure.</p>
+                    
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <div class="number">5000+</div>
+                            <div>Happy Customers</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="number">99.9%</div>
+                            <div>Uptime</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="number">24/7</div>
+                            <div>Support</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="year">2020</div>
+                            <h4>Cloud Kenya Host Founded</h4>
+                            <p>Started with a mission to provide reliable hosting in Nairobi</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2021</div>
+                            <h4>First Data Center</h4>
+                            <p>Opened our first Tier III data center in Nairobi</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2022</div>
+                            <h4>5000 Customers</h4>
+                            <p>Reached 5000 customers across East Africa</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="year">2023</div>
+                            <h4>Edge Network Launch</h4>
+                            <p>Launched edge computing network across Africa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===================== BLOG PAGE ===================== -->
+    <div id="blog-page" style="display: none;">
+        <div class="page-header">
+            <h1>Our <span>Blog</span></h1>
+            <p>Latest news, tips, and insights from the Cloud Kenya Host team</p>
+        </div>
+
+        <section>
+            <div class="blog-grid">
+                <div class="blog-content">
+                    <!-- Featured Post -->
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <span class="blog-category">Featured</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span>📅 March 15, 2026</span>
+                                <span>👤 By John Kimani</span>
+                                <span>💬 12 comments</span>
+                            </div>
+                            <h3>How to Choose the Right Hosting for Your Kenyan Business</h3>
+                            <p>A comprehensive guide to understanding different hosting types and choosing the best option for your specific needs in the Kenyan market.</p>
+                            <a class="btn btn-outline btn-small" onclick="showToast('Reading full article...')">Read More</a>
+                        </div>
+                    </div>
+
+                    <!-- Regular Posts -->
+                    <div class="blog-card">
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span>📅 March 10, 2026</span>
+                                <span>👤 By Mary Wanjiku</span>
+                            </div>
+                            <h3>5 Reasons Your Website Needs SSL Certificate</h3>
+                            <p>Security is paramount in today's digital landscape. Learn why SSL is essential for your website's credibility and SEO rankings.</p>
+                            <a class="btn btn-outline btn-small" onclick="showToast('Reading full article...')">Read More</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span>📅 March 5, 2026</span>
+                                <span>👤 By David Omondi</span>
+                            </div>
+                            <h3>WordPress vs Custom Development: What's Best for You?</h3>
+                            <p>We break down the pros and cons of using WordPress versus custom development for your business website.</p>
+                            <a class="btn btn-outline btn-small" onclick="showToast('Reading full article...')">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <div class="sidebar-widget">
+                        <h3>Search</h3>
+                        <input type="text" placeholder="Search articles..." style="width:100%;padding:0.5rem;background:rgba(0,0,0,0.3);border:1px solid rgba(0,255,213,0.2);border-radius:5px;color:var(--text);">
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Popular Posts</h3>
+                        <div class="popular-post">
+                            <div style="width:60px;height:60px;background:linear-gradient(45deg,var(--accent),var(--accent2));border-radius:10px;"></div>
+                            <div>
+                                <h4>Getting Started with Cloud Hosting</h4>
+                                <span>Feb 28, 2026</span>
+                            </div>
+                        </div>
+                        <div class="popular-post">
+                            <div style="width:60px;height:60px;background:linear-gradient(45deg,var(--accent),var(--accent2));border-radius:10px;"></div>
+                            <div>
+                                <h4>10 Tips for Website Security</h4>
+                                <span>Feb 20, 2026</span>
+                            </div>
+                        </div>
+                        <div class="popular-post">
+                            <div style="width:60px;height:60px;background:linear-gradient(45deg,var(--accent),var(--accent2));border-radius:10px;"></div>
+                            <div>
+                                <h4>Understanding CDN Benefits</h4>
+                                <span>Feb 15, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-widget">
+                        <h3>Categories</h3>
+                        <div class="tag-cloud">
+                            <span class="tag">Hosting</span>
+                            <span class="tag">Security</span>
+                            <span class="tag">WordPress</span>
+                            <span class="tag">Development</span>
+                            <span class="tag">Business</span>
+                            <span class="tag">Tutorials</span>
+                            <span class="tag">News</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===================== CAREERS PAGE ===================== -->
+    <div id="careers-page" style="display: none;">
+        <div class="page-header">
+            <h1>Join Our <span>Team</span></h1>
+            <p>Help us build the future of cloud computing in Africa</p>
+        </div>
+
+        <section>
+            <div class="careers-grid">
+                <div>
+                    <h2 class="section-title">Open <span>Positions</span></h2>
+                    
+                    <div class="job-card">
+                        <div class="job-header">
+                            <h3>Senior Cloud Engineer</h3>
+                            <span class="job-type">Full-time</span>
+                        </div>
+                        <div class="job-location">📍 Nairobi, Kenya (Hybrid)</div>
+                        <p>We're looking for an experienced cloud engineer to help us build and maintain our infrastructure.</p>
+                        <ul class="job-requirements">
+                            <li>5+ years experience with AWS/Azure/GCP</li>
+                            <li>Strong knowledge of Kubernetes and Docker</li>
+                            <li>Experience with infrastructure as code</li>
+                            <li>Kenyan citizen or work permit</li>
+                        </ul>
+                        <a class="btn btn-primary btn-small" onclick="applyForJob('Senior Cloud Engineer')">Apply Now</a>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-header">
+                            <h3>Customer Support Specialist</h3>
+                            <span class="job-type">Full-time</span>
+                        </div>
+                        <div class="job-location">📍 Nairobi, Kenya (On-site)</div>
+                        <p>Join our support team to help customers with their hosting needs.</p>
+                        <ul class="job-requirements">
+                            <li>Excellent communication skills</li>
+                            <li>Basic technical knowledge (HTML, DNS, cPanel)</li>
+                            <li>Fluent in English and Swahili</li>
+                            <li>Customer service experience</li>
+                        </ul>
+                        <a class="btn btn-primary btn-small" onclick="applyForJob('Customer Support Specialist')">Apply Now</a>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-header">
+                            <h3>DevOps Engineer</h3>
+                            <span class="job-type">Full-time</span>
+                        </div>
+                        <div class="job-location">📍 Remote (Kenya)</div>
+                        <p>Help us automate and improve our deployment processes.</p>
+                        <ul class="job-requirements">
+                            <li>Experience with CI/CD pipelines</li>
+                            <li>Knowledge of Linux administration</li>
+                            <li>Scripting skills (Python, Bash)</li>
+                            <li>Experience with monitoring tools</li>
+                        </ul>
+                        <a class="btn btn-primary btn-small" onclick="applyForJob('DevOps Engineer')">Apply Now</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="section-title">Why Work <span>With Us</span></h2>
+                    
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <div class="icon">💰</div>
+                            <h4>Competitive Salary</h4>
+                            <p>Top market rates + annual bonuses</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="icon">🏥</div>
+                            <h4>Health Insurance</h4>
+                            <p>Comprehensive cover for you and family</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="icon">🏠</div>
+                            <h4>Remote Work</h4>
+                            <p>Flexible work arrangements</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="icon">📚</div>
+                            <h4>Learning Budget</h4>
+                            <p>Annual training allowance</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="icon">⚡</div>
+                            <h4>Stock Options</h4>
+                            <p>Share in our success</p>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="icon">🎉</div>
+                            <h4>Team Events</h4>
+                            <p>Regular team building activities</p>
+                        </div>
+                    </div>
+
+                    <div class="job-card" style="margin-top:2rem;">
+                        <h3>Don't See Your Role?</h3>
+                        <p>We're always looking for talented individuals to join our team. Send us your CV and we'll keep you in mind for future opportunities.</p>
+                        <a class="btn btn-outline" onclick="showContactForm()">Send Speculative Application</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===================== NEW: AFFILIATE PROGRAM PAGE ===================== -->
+    <div id="affiliate-page" style="display: none;">
+        <div class="page-header">
+            <h1>Affiliate <span>Program</span></h1>
+            <p>Earn up to 50% recurring commissions by referring customers to Cloud Kenya Host</p>
+        </div>
+
+        <section>
+            <div class="affiliate-stats">
+                <div class="affiliate-stat">
+                    <div class="number">30%</div>
+                    <p>Average Commission</p>
+                </div>
+                <div class="affiliate-stat">
+                    <div class="number">24h</div>
+                    <p>Cookie Duration</p>
+                </div>
+                <div class="affiliate-stat">
+                    <div class="number">500+</div>
+                    <p>Active Affiliates</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Commission <span>Tiers</span></h2>
+            <div class="commission-grid">
+                <div class="commission-tier">
+                    <h4>Bronze</h4>
+                    <h3>30%</h3>
+                    <p>0-10 sales/month</p>
+                    <ul class="features-list">
+                        <li>30-day cookie</li>
+                        <li>Monthly payouts</li>
+                        <li>Basic banners</li>
+                    </ul>
+                </div>
+                <div class="commission-tier">
+                    <h4>Silver</h4>
+                    <h3>40%</h3>
+                    <p>11-50 sales/month</p>
+                    <ul class="features-list">
+                        <li>45-day cookie</li>
+                        <li>Bi-weekly payouts</li>
+                        <li>Custom banners</li>
+                    </ul>
+                </div>
+                <div class="commission-tier">
+                    <h4>Gold</h4>
+                    <h3>50%</h3>
+                    <p>51+ sales/month</p>
+                    <ul class="features-list">
+                        <li>60-day cookie</li>
+                        <li>Weekly payouts</li>
+                        <li>Dedicated manager</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-top:3rem;">
+                <button class="btn btn-primary" onclick="showToast('Affiliate application form opened')">Join Affiliate Program</button>
+                <button class="btn btn-outline" onclick="showToast('Affiliate login opened')">Affiliate Login</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===================== NEW: KNOWLEDGE BASE PAGE ===================== -->
+    <div id="knowledge-page" style="display: none;">
+        <div class="page-header">
+            <h1>Knowledge <span>Base</span></h1>
+            <p>Find answers, tutorials, and guides to help you succeed</p>
+        </div>
+
+        <section>
+            <div class="knowledge-categories">
+                <div class="category-card" onclick="showToast('Getting Started articles')">
+                    <div class="category-icon">🚀</div>
+                    <h4>Getting Started</h4>
+                    <div class="article-count">24 articles</div>
+                </div>
+                <div class="category-card" onclick="showToast('WordPress articles')">
+                    <div class="category-icon">📝</div>
+                    <h4>WordPress</h4>
+                    <div class="article-count">56 articles</div>
+                </div>
+                <div class="category-card" onclick="showToast('Security articles')">
+                    <div class="category-icon">🔒</div>
+                    <h4>Security</h4>
+                    <div class="article-count">31 articles</div>
+                </div>
+                <div class="category-card" onclick="showToast('Email articles')">
+                    <div class="category-icon">📧</div>
+                    <h4>Email Setup</h4>
+                    <div class="article-count">18 articles</div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Popular <span>Articles</span></h2>
+            <div class="knowledge-grid">
+                <div class="knowledge-article">
+                    <span class="article-meta">📅 Updated 2 days ago</span>
+                    <h4>How to Point Your Domain to Cloud Kenya Host</h4>
+                    <p>Step-by-step guide to update nameservers and DNS records</p>
+                    <a onclick="showToast('Opening article...')" style="color:var(--accent);cursor:pointer;">Read more →</a>
+                </div>
+                <div class="knowledge-article">
+                    <span class="article-meta">📅 Updated 5 days ago</span>
+                    <h4>Installing WordPress with One-Click</h4>
+                    <p>Quick guide to install WordPress using our auto-installer</p>
+                    <a onclick="showToast('Opening article...')" style="color:var(--accent);cursor:pointer;">Read more →</a>
+                </div>
+                <div class="knowledge-article">
+                    <span class="article-meta">📅 Updated 1 week ago</span>
+                    <h4>Setting Up Business Email</h4>
+                    <p>Configure your professional email accounts and clients</p>
+                    <a onclick="showToast('Opening article...')" style="color:var(--accent);cursor:pointer;">Read more →</a>
+                </div>
+                <div class="knowledge-article">
+                    <span class="article-meta">📅 Updated 1 week ago</span>
+                    <h4>SSL Certificate Installation Guide</h4>
+                    <p>How to enable and manage SSL certificates</p>
+                    <a onclick="showToast('Opening article...')" style="color:var(--accent);cursor:pointer;">Read more →</a>
+                </div>
+                <div class="knowledge-article">
+                    <span class="article-meta">📅 Updated 2 weeks ago</span>
+                    <h4>Understanding Your Control Panel</h4>
+                    <p>Tour of Cloud Kenya Host dashboard features and tools</p>
+                    <a onclick="showToast('Opening article...')" style="color:var(--accent);cursor:pointer;">Read more →</a>
+                </div>
+                <div class="knowledge-article">
+                    <span class="article-meta">📅 Updated 2 weeks ago</span>
+                    <h4>Backup and Restore Guide</h4>
+                    <p>How to backup your website and restore from backups</p>
+                    <a onclick="showToast('Opening article...')" style="color:var(--accent);cursor:pointer;">Read more →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===================== NEW: SERVER STATUS PAGE ===================== -->
+    <div id="status-page" style="display: none;">
+        <div class="page-header">
+            <h1>System <span>Status</span></h1>
+            <p>Real-time status of Cloud Kenya Host services and infrastructure</p>
+        </div>
+
+        <section>
+            <div class="status-grid">
+                <div class="status-card">
+                    <div class="status-header">
+                        <h3>Web Hosting</h3>
+                        <span class="status-badge status-operational">Operational</span>
+                    </div>
+                    <p>Uptime: 99.98%</p>
+                    <div class="uptime-chart">
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:95%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                    </div>
+                </div>
+                <div class="status-card">
+                    <div class="status-header">
+                        <h3>Email Services</h3>
+                        <span class="status-badge status-operational">Operational</span>
+                    </div>
+                    <p>Uptime: 99.95%</p>
+                    <div class="uptime-chart">
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:98%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                    </div>
+                </div>
+                <div class="status-card">
+                    <div class="status-header">
+                        <h3>DNS Servers</h3>
+                        <span class="status-badge status-operational">Operational</span>
+                    </div>
+                    <p>Response time: 12ms</p>
+                    <div class="uptime-chart">
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                    </div>
+                </div>
+                <div class="status-card">
+                    <div class="status-header">
+                        <h3>Control Panel</h3>
+                        <span class="status-badge status-operational">Operational</span>
+                    </div>
+                    <p>Load: 23%</p>
+                    <div class="uptime-chart">
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:98%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                        <div class="uptime-bar" style="height:100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">Recent <span>Incidents</span></h2>
+            <div class="incident-list">
+                <div class="incident-item">
+                    <div class="incident-time">March 10, 2026 - 14:30 EAT</div>
+                    <h4>Network Maintenance Completed</h4>
+                    <p>Scheduled maintenance completed successfully. No downtime experienced.</p>
+                </div>
+                <div class="incident-item">
+                    <div class="incident-time">March 5, 2026 - 09:15 EAT</div>
+                    <h4>DNS Propagation Delay</h4>
+                    <p>Minor delay in DNS updates resolved within 15 minutes.</p>
+                </div>
+                <div class="incident-item">
+                    <div class="incident-time">February 28, 2026 - 22:00 EAT</div>
+                    <h4>Emergency Security Patch</h4>
+                    <p>Critical security update applied. Services unaffected.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===================== NEW: REFERRAL SYSTEM SECTION (ADDED TO HOME PAGE) ===================== -->
+    <section id="referral-section" style="display: block;">
+        <h2 class="section-title">Refer & <span>Earn</span></h2>
+        <div class="referral-code-box">
+            <h3>Your Personal Referral Code</h3>
+            <div class="referral-code">CLOUDKEN2026</div>
+            <button class="copy-button" onclick="copyReferralCode()">Copy Code</button>
+        </div>
+
+        <div class="referral-stats">
+            <div class="referral-stat">
+                <div class="number">KES 500</div>
+                <p>Per Successful Referral</p>
+            </div>
+            <div class="referral-stat">
+                <div class="number">50%</div>
+                <p>First Month Commission</p>
+            </div>
+            <div class="referral-stat">
+                <div class="number">10%</div>
+                <p>Lifetime Recurring</p>
+            </div>
+        </div>
+
+        <div style="text-align:center; margin-top:2rem;">
+            <button class="btn btn-primary" onclick="showToast('Referral link copied!')">Share Your Link</button>
+            <button class="btn btn-outline" onclick="showToast('Viewing referral history')">View Earnings</button>
+        </div>
+    </section>
+
+    <!-- ===================== CONTACT PAGE ===================== -->
+    <div id="contact-page" style="display: none;">
+        <div class="page-header">
+            <h1>Get In <span>Touch</span></h1>
+            <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </div>
+
+        <section>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's Talk About Your Project</h3>
+                    <p>Have questions? We're here to help. Reach out to us through any of these channels.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <div>
+                                <strong>Visit Us</strong><br>
+                                Nairobi, Kenya
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📞</span>
+                            <div>
+                                <strong>Call Us</strong><br>
+                                +254 717 048 943
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">✉️</span>
+                            <div>
+                                <strong>Email</strong><br>
+                                hello@cloudkenya.co.ke
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">⏰</span>
+                            <div>
+                                <strong>Support Hours</strong><br>
+                                24/7 - Always Open
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a class="social-link" onclick="shareOnWhatsApp()">📱</a>
+                        <a class="social-link" onclick="shareOnTwitter()">🐦</a>
+                        <a class="social-link" onclick="shareOnFacebook()">📘</a>
+                        <a class="social-link" onclick="shareOnLinkedIn()">🔗</a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" placeholder="John Doe" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+254 700 000 000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service">Service of Interest</label>
+                        <select id="service">
+                            <option value="hosting">Web Hosting</option>
+                            <option value="vps">Cloud VPS</option>
+                            <option value="email">Business Email</option>
+                            <option value="ssl">SSL Certificates</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Preferred Contact Method</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="contact-method" value="email" checked> Email
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="contact-method" value="phone"> Phone
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="contact-method" value="whatsapp"> WhatsApp
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" rows="5" placeholder="Tell us about your project..." required></textarea>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="sendMessage()">Send Message</button>
+                    <button class="btn btn-outline" onclick="sendViaWhatsApp()" style="margin-top: 1rem;">Send via WhatsApp</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Cloud Kenya Host</h4>
+                <p>Premium web hosting solutions tailored for Kenya and Africa.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Your email" id="newsletterEmail">
+                    <button class="btn btn-primary btn-small" onclick="subscribeNewsletter()">Subscribe</button>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a onclick="showPage('home')">Home</a>
+                <a onclick="showPage('about')">About Us</a>
+                <a onclick="showPage('blog')">Blog</a>
+                <a onclick="showPage('careers')">Careers</a>
+                <a onclick="showPage('affiliate')">Affiliate</a>
+                <a onclick="showPage('knowledge')">Knowledge Base</a>
+                <a onclick="showPage('status')">System Status</a>
+                <a onclick="showPage('contact')">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <a onclick="showToast('Web Hosting')">Web Hosting</a>
+                <a onclick="showToast('Cloud VPS')">Cloud VPS</a>
+                <a onclick="showToast('Business Email')">Business Email</a>
+                <a onclick="showToast('SSL Certificates')">SSL Certificates</a>
+                <a onclick="showToast('Domain Names')">Domain Names</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a onclick="showToast('Help Center')">Help Center</a>
+                <a onclick="showToast('Documentation')">Documentation</a>
+                <a onclick="showToast('API')">API</a>
+                <a onclick="showToast('Status Page')">Status Page</a>
+                <a onclick="showToast('Report Abuse')">Report Abuse</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Cloud Kenya Host. All rights reserved. | <a onclick="showToast('Privacy Policy')">Privacy Policy</a> | <a onclick="showToast('Terms of Service')">Terms of Service</a> | <a onclick="showToast('Cookie Policy')">Cookie Policy</a></p>
+        </div>
+    </footer>
+
+    <!-- ===================== TOAST NOTIFICATION ===================== -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ===================== PAGE NAVIGATION =====================
+        function showPage(page) {
+            // Hide all pages
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('about-page').style.display = 'none';
+            document.getElementById('blog-page').style.display = 'none';
+            document.getElementById('careers-page').style.display = 'none';
+            document.getElementById('affiliate-page').style.display = 'none';
+            document.getElementById('knowledge-page').style.display = 'none';
+            document.getElementById('status-page').style.display = 'none';
+            document.getElementById('contact-page').style.display = 'none';
+            
+            // Show selected page
+            document.getElementById(page + '-page').style.display = 'block';
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.textContent.toLowerCase().includes(page) || 
+                    (page === 'home' && link.textContent === 'Home') ||
+                    (page === 'affiliate' && link.textContent === 'Affiliate') ||
+                    (page === 'knowledge' && link.textContent === 'Knowledge') ||
+                    (page === 'status' && link.textContent === 'Status')) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Close mobile menu if open
+            document.getElementById('navLinks').classList.remove('active');
+            
+            // Update URL
+            updateURL(page);
+        }
+
+        // ===================== NAVIGATION =====================
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // ===================== OPEN CONTROL PANEL =====================
+        function openControlPanel() {
+            window.open('http://localhost:3000', '_blank');
+        }
+
+        function scrollToPricing() {
+            document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===================== CONTACT FORM =====================
+        function sendMessage() {
+            const name = document.getElementById('name')?.value || 'Customer';
+            const email = document.getElementById('email')?.value || 'Not provided';
+            const phone = document.getElementById('phone')?.value || 'Not provided';
+            const service = document.getElementById('service')?.value || 'Not specified';
+            const message = document.getElementById('message')?.value || 'Interested in your services';
+            
+            // Get selected contact method
+            const contactMethod = document.querySelector('input[name="contact-method"]:checked')?.value || 'email';
+
+            // Validate required fields
+            if (!name || name === 'Customer') {
+                showToast('Please fill in your name');
+                return;
+            }
+
+            if (!email || email === 'Not provided') {
+                showToast('Please fill in your email');
+                return;
+            }
+
+            if (!message || message === 'Interested in your services') {
+                showToast('Please enter a message');
+                return;
+            }
+
+            // Prepare email body
+            const emailBody = `
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Service: ${service}
+Preferred Contact: ${contactMethod}
+
+Message:
+${message}
+            `;
+
+            // Redirect to email
+            const mailtoLink = `mailto:sales@cloudkenya.co.ke?subject=New Inquiry from ${name}&body=${encodeURIComponent(emailBody)}`;
+            
+            showToast('Opening your email client...');
+            setTimeout(() => {
+                window.location.href = mailtoLink;
+            }, 1500);
+        }
+
+        function sendViaWhatsApp() {
+            const name = document.getElementById('name')?.value || 'Customer';
+            const email = document.getElementById('email')?.value || 'Not provided';
+            const message = document.getElementById('message')?.value || 'Interested in your services';
+
+            // Format WhatsApp message
+            const whatsappMessage = `Hello  Cloud Kenya Host!%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A%0A*Message:*%0A${message}`;
+            
+            // Kenya WhatsApp number
+            const whatsappNumber = '254700000000';
+            
+            showToast('Opening WhatsApp...');
+            setTimeout(() => {
+                window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank');
+            }, 1500);
+        }
+
+        // ===================== JOB APPLICATION =====================
+        function applyForJob(jobTitle) {
+            const emailBody = `
+I would like to apply for the ${jobTitle} position.
+
+Please find my CV attached.
+
+Best regards,
+[Your Name]
+            `;
+            
+            const mailtoLink = `mailto:careers@cloudkenya.co.ke?subject=Application for ${jobTitle}&body=${encodeURIComponent(emailBody)}`;
+            
+            showToast('Opening email client to apply...');
+            setTimeout(() => {
+                window.location.href = mailtoLink;
+            }, 1500);
+        }
+
+        function showContactForm() {
+            showPage('contact');
+            showToast('Please fill out the contact form');
+        }
+
+        // ===================== NEWSLETTER =====================
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletterEmail')?.value;
+            
+            if (!email) {
+                showToast('Please enter your email');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showToast('Please enter a valid email');
+                return;
+            }
+            
+            showToast('Thanks for subscribing! Check your email for confirmation.');
+            document.getElementById('newsletterEmail').value = '';
+        }
+
+        // ===================== REFERRAL SYSTEM =====================
+        function copyReferralCode() {
+            const code = 'CLOUDKEN2026';
+            navigator.clipboard.writeText(code).then(() => {
+                showToast('Referral code copied to clipboard!');
+            }).catch(() => {
+                showToast('Press Ctrl+C to copy: ' + code);
+            });
+        }
+
+        // ===================== SHARE FUNCTIONS =====================
+        function shareOnWhatsApp() {
+            const text = "Check out  Cloud Kenya Host - Kenya's premier cloud hosting provider!";
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function shareOnTwitter() {
+            const text = "Check out  Cloud Kenya Host - Kenya's premier cloud hosting provider!";
+            const url = "https://cloudkenya.co.ke";
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+
+        function shareOnFacebook() {
+            const url = "https://cloudkenya.co.ke";
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+        }
+
+        function shareOnLinkedIn() {
+            const url = "https://cloudkenya.co.ke";
+            const title = "Clo Cloud Kenya Hostud Kenya";
+            const summary = "Kenya's premier cloud hosting provider";
+            window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(summary)}`, '_blank');
+        }
+
+        // ===================== HELPER FUNCTIONS =====================
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function updateURL(page) {
+            const url = new URL(window.location);
+            url.searchParams.set('page', page);
+            window.history.pushState({ page: page }, '', url);
+        }
+
+        // ===================== INITIALIZATION =====================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check URL for page parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const page = urlParams.get('page') || 'home';
+            showPage(page);
+            
+            // Add smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+
+        // Handle browser back/forward
+        window.addEventListener('popstate', (event) => {
+            if (event.state && event.state.page) {
+                showPage(event.state.page);
+            } else {
+                showPage('home');
+            }
+        });
+    </script>
+</body>
+</html>

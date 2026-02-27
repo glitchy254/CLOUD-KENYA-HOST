@@ -1,0 +1,11 @@
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/cloudkenya
+JWT_SECRET=your-super-secret-jwt-key-change-this
+JWT_EXPIRE=7d
+NODE_ENV=production
+MPESA_CONSUMER_KEY=your_mpesa_consumer_key
+MPESA_CONSUMER_SECRET=your_mpesa_secret
+MPESA_PASSKEY=your_mpesa_passkey
+MPESA_SHORTCODE=174379
+CLOUDFLARE_API_TOKEN=your_cloudflare_token
+CLOUDFLARE_ZONE_ID=your_zone_id

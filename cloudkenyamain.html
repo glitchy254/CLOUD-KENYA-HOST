@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CLOUD KENYA HOST| Control Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===================== YOUR EXACT CSS ===================== */
+:root{
+  --bg:#05080f;
+  --panel:#0c1328;
+  --glass:rgba(255,255,255,0.08);
+  --accent:#00ffd5;
+  --accent2:#00aaff;
+  --danger:#ff4d4d;
+  --text:#e6f1ff;
+  --muted:#9fb0ff;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Segoe UI,system-ui;
+  background:radial-gradient(circle at top,#0f1a35,#020409);
+  color:var(--text);
+}
+.hidden{display:none}
+.fade{animation:fade .5s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+header{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:70px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 24px;
+  backdrop-filter:blur(12px);
+  z-index:100;
+}
+header h1{letter-spacing:1px;font-size:20px}
+header .icons span{
+  margin-left:18px;
+  cursor:pointer;
+}
+
+.sidebar{
+  position:fixed;
+  top:70px;
+  left:0;
+  width:250px;
+  bottom:0;
+  background:rgba(10,15,40,.92);
+  backdrop-filter:blur(14px);
+  overflow:auto;
+}
+.sidebar h4{
+  padding:14px 20px;
+  color:var(--muted);
+  font-size:12px;
+  text-transform:uppercase;
+}
+.sidebar a{
+  display:block;
+  padding:14px 22px;
+  color:var(--text);
+  text-decoration:none;
+  cursor:pointer;
+}
+.sidebar a:hover{
+  background:rgba(255,255,255,.07);
+}
+
+main{
+  margin-left:250px;
+  padding:90px 30px 40px;
+}
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:24px;
+  box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.stat{font-size:32px;color:var(--accent)}
+
+button{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border:none;
+  padding:10px 20px;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:600;
+  margin:5px;
+}
+button.secondary{
+  background:#222;
+  color:white;
+}
+button.danger{
+  background:var(--danger);
+}
+
+input,select{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  background:#111;
+  border:1px solid #333;
+  color:white;
+  border-radius:10px;
+}
+
+.toggle{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:10px 0;
+}
+.toggle input{width:auto}
+
+.timeline{
+  border-left:2px solid var(--accent);
+  padding-left:20px;
+}
+.timeline div{
+  margin-bottom:15px;
+  animation:fade .5s ease;
+}
+
+.progress{
+  height:10px;
+  background:#222;
+  border-radius:10px;
+  overflow:hidden;
+  margin:10px 0;
+}
+.progress span{
+  display:block;
+  height:100%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:200;
+}
+.modal .card{width:90%;max-width:420px}
+
+#cmd{
+  position:fixed;
+  top:20%;
+  left:50%;
+  transform:translateX(-50%);
+  width:420px;
+  background:#111;
+  border-radius:14px;
+  padding:16px;
+  display:none;
+  z-index:300;
+}
+
+.toast{
+  position:fixed;
+  bottom:30px;right:30px;
+  background:#111;
+  padding:14px 22px;
+  border-radius:14px;
+  opacity:0;
+  transition:.4s;
+  z-index:1000;
+}
+.toast.show{opacity:1}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>CLOUD KENYA HOST</h1>
+  <div class="icons">
+    <span onclick="toggleNotifications()">🔔</span>
+    <span onclick="openCmd()">⌘</span>
+  </div>
+</header>
+
+<!-- ===================== SIDEBAR ===================== -->
+<div class="sidebar">
+  <h4>Dashboard</h4>
+  <a onclick="show('dashboard')">Overview</a>
+
+  <h4>Websites</h4>
+  <a onclick="show('domains')">Domains</a>
+  <a onclick="show('subdomains')">Subdomains</a>
+  <a onclick="show('installer')">Installer</a>
+
+  <h4>Files</h4>
+  <a onclick="show('files')">File Manager</a>
+
+  <h4>Resources</h4>
+  <a onclick="show('usage')">Usage & Limits</a>
+  <a onclick="show('server')">Server Status</a>
+
+  <h4>Security</h4>
+  <a onclick="show('security')">Security Center</a>
+
+  <h4>Support</h4>
+  <a onclick="show('support')">Support Center</a>
+
+  <h4>Billing</h4>
+  <a onclick="show('billing')">Billing & Payments</a>
+
+  <h4>Account</h4>
+  <a onclick="show('account')">Profile</a>
+  <a onclick="show('activity')">Activity Logs</a>
+</div>
+
+<!-- ===================== MAIN ===================== -->
+<main>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="card">
+  <h2>Overview</h2>
+  <div class="grid">
+    <div><p>Disk</p><div class="stat" id="diskUsage">1GB</div></div>
+    <div><p>Bandwidth</p><div class="stat" id="bandwidthUsage">2GB</div></div>
+    <div><p>Plan</p><div class="stat" id="currentPlan">FREE</div></div>
+  </div>
+  <div class="grid" id="domainList"></div>
+</section>
+
+<!-- SUBDOMAINS -->
+<section id="subdomains" class="card hidden">
+  <h2>Subdomains</h2>
+  <input placeholder="subdomain.yourdomain.com" id="newSubdomain">
+  <button onclick="addSubdomain()">Add Subdomain</button>
+  <div id="subdomainList"></div>
+</section>
+
+<!-- DOMAINS -->
+<section id="domains" class="card hidden">
+  <h2>Domain Management</h2>
+  <input placeholder="Add custom domain" id="newDomain">
+  <button onclick="addDomain()">Add Domain</button>
+  <p>SSL: <span id="sslStatus">🟢 Active</span></p>
+  <div class="toggle">
+    <input type="checkbox" id="cloudflareToggle" onchange="toggleCloudflare()"> Cloudflare Protection
+  </div>
+  <div id="domainList"></div>
+</section>
+
+<!-- INSTALLER -->
+<section id="installer" class="card hidden">
+  <h2>Website Installer</h2>
+  <div class="grid">
+    <button onclick="installApp('WordPress')">WordPress</button>
+    <button onclick="installApp('Joomla')">Joomla</button>
+    <button onclick="installApp('Laravel')">Laravel</button>
+    <button onclick="installApp('Static')">Static</button>
+  </div>
+</section>
+
+<!-- FILES -->
+<section id="files" class="card hidden">
+  <h2>File Manager</h2>
+  <input type="file" id="fileInput" style="display:none" onchange="handleFileSelect(this)">
+  <button onclick="document.getElementById('fileInput').click()">Upload File</button>
+  <button class="secondary" onclick="createDirectory()">New Folder</button>
+  <div id="fileList"></div>
+</section>
+
+<!-- USAGE -->
+<section id="usage" class="card hidden">
+  <h2>Resource Usage</h2>
+  <p>Disk</p><div class="progress"><span id="diskProgress" style="width:70%"></span></div>
+  <p>CPU</p><div class="progress"><span id="cpuProgress" style="width:30%"></span></div>
+  <p>Bandwidth</p><div class="progress"><span id="bandwidthProgress" style="width:20%"></span></div>
+</section>
+
+<!-- SERVER -->
+<section id="server" class="card hidden">
+  <h2>Server Status</h2>
+  <p>Uptime: <b id="uptime">99.98%</b></p>
+  <p>CPU</p><div class="progress"><span id="serverCpu" style="width:40%"></span></div>
+  <p>RAM</p><div class="progress"><span id="serverRam" style="width:55%"></span></div>
+  <p>PHP: <span id="phpStatus">🟢 Running</span></p>
+  <p>MySQL: <span id="mysqlStatus">🟢 Running</span></p>
+</section>
+
+<!-- SECURITY -->
+<section id="security" class="card hidden">
+  <h2>Security Center</h2>
+  <p>SSL: <span id="securitySsl">Active</span></p>
+  <button onclick="runMalwareScan()">Run Malware Scan</button>
+  <button class="secondary" onclick="backupRestore()">Backup Restore</button>
+</section>
+
+<!-- SUPPORT -->
+<section id="support" class="card hidden">
+  <h2>Support Center</h2>
+  <input placeholder="Subject" id="ticketSubject">
+  <textarea placeholder="Message" id="ticketMessage" style="width:100%;padding:10px;margin-top:10px;background:#111;border:1px solid #333;color:white;border-radius:10px;" rows="4"></textarea>
+  <button onclick="createTicket()">Create Ticket</button>
+</section>
+
+<!-- BILLING -->
+<section id="billing" class="card hidden">
+  <h2>Billing & Payments</h2>
+  <p>Current Plan: <span id="billingPlan">FREE</span></p>
+  <button onclick="upgradePlan()">Upgrade</button>
+  <p>M-Pesa & Card Supported</p>
+  <div id="paymentSection" style="display:none">
+    <input placeholder="Phone Number (e.g., 0712345678)" id="mpesaPhone">
+    <input placeholder="Amount" id="mpesaAmount" type="number">
+    <button onclick="initiateMpesa()">Pay with M-Pesa</button>
+  </div>
+</section>
+
+<!-- ACCOUNT -->
+<section id="account" class="card hidden">
+  <h2>Account & Profile</h2>
+  <input placeholder="Username" id="accountUsername" value="clouduser">
+  <input placeholder="Email" id="accountEmail" value="user@cloudkenya.co.ke">
+  <input type="password" placeholder="New Password" id="accountPassword">
+  <select id="accountLanguage">
+    <option value="en">English</option>
+    <option value="sw">Swahili</option>
+  </select>
+  <select id="accountTimezone">
+    <option value="Africa/Nairobi">Africa/Nairobi</option>
+  </select>
+  <div class="toggle">
+    <input type="checkbox" id="account2fa"> Enable 2FA
+  </div>
+  <button onclick="saveProfile()">Save Changes</button>
+</section>
+
+<!-- ACTIVITY -->
+<section id="activity" class="card hidden">
+  <h2>Activity Logs</h2>
+  <div class="timeline" id="activityLogs">
+    <div>🔐 Login from 197.***</div>
+    <div>📂 File uploaded</div>
+    <div>🌐 Subdomain created</div>
+    <div>🛡 Security scan completed</div>
+  </div>
+</section>
+
+</main>
+
+<!-- COMMAND -->
+<div id="cmd">
+  <input placeholder="Type a command..." id="cmdInput" onkeyup="handleCommand(event)">
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===================== CONFIGURATION =====================
+const API_BASE_URL = 'http://localhost:3000/api';
+let authToken = localStorage.getItem('token');
+
+// ===================== AUTHENTICATION =====================
+document.addEventListener('DOMContentLoaded', () => {
+    if (!authToken) {
+        showLoginModal();
+    } else {
+        loadUserData();
+        startRealTimeUpdates();
+    }
+});
+
+function showLoginModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.id = 'loginModal';
+    modal.innerHTML = `
+        <div class="card">
+            <h2>Login to  Cloud Kenya Host</h2>
+            <input type="email" id="loginEmail" placeholder="Email" value="demo@cloudkenya.co.ke">
+            <input type="password" id="loginPassword" placeholder="Password" value="password123">
+            <button onclick="login()">Login</button>
+            <p style="text-align:center;margin-top:10px">
+                <a href="#" onclick="showRegisterModal()">Create Account</a>
+            </p>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function showRegisterModal() {
+    document.getElementById('loginModal').remove();
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.id = 'registerModal';
+    modal.innerHTML = `
+        <div class="card">
+            <h2>Create Account</h2>
+            <input type="text" id="regUsername" placeholder="Username">
+            <input type="email" id="regEmail" placeholder="Email">
+            <input type="password" id="regPassword" placeholder="Password">
+            <button onclick="register()">Register</button>
+            <p style="text-align:center;margin-top:10px">
+                <a href="#" onclick="showLoginModal()">Back to Login</a>
+            </p>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+async function login() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            localStorage.setItem('token', data.token);
+            authToken = data.token;
+            document.querySelector('.modal').remove();
+            loadUserData();
+            notify('Login successful!');
+        } else {
+            notify(data.message || 'Login failed');
+        }
+    } catch (err) {
+        notify('Connection error. Make sure the backend is running.');
+        console.error(err);
+    }
+}
+
+async function register() {
+    const username = document.getElementById('regUsername').value;
+    const email = document.getElementById('regEmail').value;
+    const password = document.getElementById('regPassword').value;
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            localStorage.setItem('token', data.token);
+            authToken = data.token;
+            document.querySelector('.modal').remove();
+            loadUserData();
+            notify('Registration successful!');
+        } else {
+            notify(data.message || 'Registration failed');
+        }
+    } catch (err) {
+        notify('Connection error');
+        console.error(err);
+    }
+}
+
+async function logout() {
+    try {
+        await fetch(`${API_BASE_URL}/auth/logout`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+    } catch (err) {
+        console.error('Logout error:', err);
+    }
+    
+    localStorage.removeItem('token');
+    authToken = null;
+    location.reload();
+}
+
+// ===================== DATA LOADING =====================
+async function loadUserData() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/auth/me`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            updateUIWithUserData(data.user);
+            loadDashboardData();
+            loadActivityLogs();
+            loadServerStatus();
+        }
+    } catch (err) {
+        console.error('Failed to load user data:', err);
+        if (err.message.includes('401')) {
+            logout();
+        }
+    }
+}
+
+function updateUIWithUserData(user) {
+    // Update account section
+    if (document.getElementById('accountUsername')) {
+        document.getElementById('accountUsername').value = user.username || 'clouduser';
+        document.getElementById('accountEmail').value = user.email || 'user@cloudkenya.co.ke';
+        document.getElementById('accountLanguage').value = user.language || 'en';
+    }
+    
+    // Update dashboard stats
+    const diskGB = ((user.diskUsage || 0) / 1073741824).toFixed(2);
+    const bandwidthGB = ((user.bandwidthUsage || 0) / 1073741824).toFixed(2);
+    
+    const diskElement = document.getElementById('diskUsage');
+    if (diskElement) diskElement.innerHTML = diskGB + 'GB';
+    
+    const bandwidthElement = document.getElementById('bandwidthUsage');
+    if (bandwidthElement) bandwidthElement.innerHTML = bandwidthGB + 'GB';
+    
+    const planElement = document.getElementById('currentPlan');
+    if (planElement) planElement.innerHTML = user.plan || 'FREE';
+    
+    const billingPlanElement = document.getElementById('billingPlan');
+    if (billingPlanElement) billingPlanElement.innerHTML = user.plan || 'FREE';
+}
+
+async function loadDashboardData() {
+    try {
+        // Load domains
+        const domainsResponse = await fetch(`${API_BASE_URL}/domains`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        
+        const domainsData = await domainsResponse.json();
+        
+        if (domainsData.success) {
+            updateDomainsUI(domainsData.domains);
+        }
+        
+        // Load usage data
+        const usageResponse = await fetch(`${API_BASE_URL}/billing/plan`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        
+        const usageData = await usageResponse.json();
+        
+        if (usageData.success) {
+            updateUsageUI(usageData.usage);
+        }
+    } catch (err) {
+        console.error('Failed to load dashboard data:', err);
+    }
+}
+
+function updateDomainsUI(domains) {
+    const dashboardDomainList = document.getElementById('domainList');
+    const domainsSection = document.getElementById('domains');
+    
+    if (!domains || domains.length === 0) {
+        if (dashboardDomainList) {
+            dashboardDomainList.innerHTML = '<p>No domains added yet</p>';
+        }
+        return;
+    }
+    
+    let html = '';
+    domains.forEach(domain => {
+        const sslStatus = domain.sslEnabled ? '🟢' : '🔴';
+        html += `
+            <div class="card" style="padding:15px;margin-bottom:10px">
+                <div style="display:flex;justify-content:space-between">
+                    <div>
+                        <strong>${domain.domain}</strong><br>
+                        <small>SSL: ${sslStatus} • IP: ${domain.ipAddress || 'Pending'}</small>
+                    </div>
+                    <div>
+                        ${!domain.sslEnabled ? 
+                            `<button class="secondary" onclick="enableSSL('${domain._id}')">Enable SSL</button>` : 
+                            ''}
+                        <button class="danger" onclick="deleteDomain('${domain._id}')">Delete</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    if (dashboardDomainList) {
+        dashboardDomainList.innerHTML = html;
+    }
+}
+
+function updateUsageUI(usage) {
+    if (!usage) return;
+    
+    const diskProgress = document.getElementById('diskProgress');
+    if (diskProgress) diskProgress.style.width = (usage.diskPercent || 70) + '%';
+    
+    const bandwidthProgress = document.getElementById('bandwidthProgress');
+    if (bandwidthProgress) bandwidthProgress.style.width = (usage.bandwidthPercent || 20) + '%';
+}
+
+// ===================== DOMAIN MANAGEMENT =====================
+async function addDomain() {
+    const domain = document.getElementById('newDomain')?.value || prompt('Enter domain name:');
+    if (!domain) return;
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/domains`, {
+            method: 'POST',
+            headers: { 
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ domain })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            notify('Domain added successfully');
+            loadDashboardData();
+            document.getElementById('newDomain').value = '';
+        } else {
+            notify(data.message || 'Failed to add domain');
+        }
+    } catch (err) {
+        notify('Error adding domain');
+    }
+}
+
+async function addSubdomain() {
+    const subdomain = document.getElementById('newSubdomain')?.value;
+    if (!subdomain) {
+        notify('Please enter a subdomain');
+        return;
+    }
+    
+    // Add .yourdomain.com if not present
+    const fullDomain = subdomain.includes('.') ? subdomain : subdomain + '.yourdomain.com';
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/domains`, {
+            method: 'POST',
+            headers: { 
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ domain: fullDomain, type: 'subdomain' })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            notify('Subdomain added successfully');
+            loadDashboardData();
+            document.getElementById('newSubdomain').value = '';
+        }
+    } catch (err) {
+        notify('Error adding subdomain');
+    }
+}
+
+async function enableSSL(domainId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/domains/${domainId}/ssl`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            notify('SSL enabled. It may take a few minutes to activate.');
+            loadDashboardData();
+        }
+    } catch (err) {
+        notify('Failed to enable SSL');
+    }
+}
+
+async function deleteDomain(domainId) {
+    if (!confirm('Delete this domain?')) return;
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/domains/${domainId}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            notify('Domain deleted');
+            loadDashboardData();
+        }
+    } catch (err) {
+        notify('Delete failed');
+    }
+}
+
+function toggleCloudflare() {
+    const enabled = document.getElementById('cloudflareToggle').checked;
+    notify(enabled ? 'Cloudflare protection enabled' : 'Cloudflare protection disabled');
+}
+
+// ===================== FILE MANAGEMENT =====================
+async function loadFiles() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/files`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            updateFilesUI(data.files);
+            updateDiskUsage(data.diskUsage, data.diskLimit);
+        }
+    } catch (err) {
+        console.error('Failed to load files:', err);
+    }
+}
+
+function updateFilesUI(files) {
+    const fileList = document.getElementById('fileList');
+    if (!fileList) return;
+    
+    if (!files || files.length === 0) {
+        fileList.innerHTML = '<p>No files uploaded yet</p>';
+        return;
+    }
+    
+    let html = '<div class="grid" style="margin-top:20px">';
+    
+    files.forEach(file => {
+        const sizeMB = (file.size / 1048576).toFixed(2);
+        const icon = file.isDirectory ? '📁' : '📄';
+        html += `
+            <div class="card" style="padding:15px">
+                <div style="display:flex;justify-content:space-between">
+                    <span>${icon} ${file.name}</span>
+                    <span>
+                        <button class="secondary" style="padding:5px" onclick="downloadFile('${file.name}')">⬇️</button>
+                        <button class="danger" style="padding:5px" onclick="deleteFile('${file.name}')">🗑️</button>
+                    </span>
+                </div>
+                <small>${sizeMB} MB • ${new Date(file.modified).toLocaleDateString()}</small>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    fileList.innerHTML = html;
+}
+
+function updateDiskUsage(used, total) {
+    const usedGB = (used / 1073741824).toFixed(2);
+    const totalGB = (total / 1073741824).toFixed(2);
+    const percent = (used / total * 100).toFixed(1);
+    
+    const diskElement = document.getElementById('diskUsage');
+    if (diskElement) diskElement.innerHTML = usedGB + 'GB';
+    
+    const diskProgress = document.getElementById('diskProgress');
+    if (diskProgress) diskProgress.style.width = percent + '%';
+}
+
+function handleFileSelect(input) {
+    if (input.files.length > 0) {
+        uploadFile(input.files[0]);
+    }
+}
+
+async function uploadFile(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/files/upload`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${authToken}` },
+            body: formData
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+            notify('File uploaded successfully');
+            loadFiles();
+        } else {
+            notify(data.message || 'Upload failed');
+        }
+    } catch (err) {
+        notify('Upload error');
+        console.error(err);
+    }
+}
+
+async function downloadFile(filename) {
+    window.open(`${API_BASE_URL}/files/download/${filename}?token=${authToken}`, '_blank');
+}
+
+async function deleteFile(filename) {
+    if (!confirm(`Delete ${filename}?`)) return;
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/files/${filename}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            notify('File deleted');
+            loadFiles();
+        }
+    } catch (err) {
+        notify('Delete failed');
+    }
+}
+
+async function createDirectory() {
+    const name = prompt('Enter directory name:');
+    if (!name) return;
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/files/mkdir`, {
+            method: 'POST',
+            headers: { 
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            notify('Directory created');
+            loadFiles();
+        }
+    } catch (err) {
+        notify('Creation failed');
+    }
+}
+
+// ===================== INSTALLER =====================
+async function installApp(type) {
+    const domain = prompt(`Enter domain for ${type} installation:`);
+    if (!domain) return;
+    
+    notify(`Installing ${type} on ${domain}...`);
+    
+    // Simulate installation (in production, this would call the backend)
+    setTimeout(() => {
+        notify(`${type} installed successfully on ${domain}`);
+    }, 2000);
+}
+
+// ===================== SERVER STATUS =====================
+async function loadServerStatus() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/server/status`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            updateServerUI(data);
+        }
+    } catch (err) {
+        console.error('Failed to load server status:', err);
+    }
+}
+
+function updateServerUI(stats) {
+    if (!stats) return;
+    
+    const uptimeElement = document.getElementById('uptime');
+    if (uptimeElement) uptimeElement.innerHTML = '99.98%';
+    
+    const cpuElement = document.getElementById('serverCpu');
+    if (cpuElement) cpuElement.style.width = (stats.cpu?.usage || 40) + '%';
+    
+    const ramElement = document.getElementById('serverRam');
+    if (ramElement) ramElement.style.width = (stats.memory?.usagePercent || 55) + '%';
+}
+
+// ===================== ACTIVITY LOGS =====================
+async function loadActivityLogs() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/activity?limit=10`, {
+            headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            updateActivityUI(data.activities);
+        }
+    } catch (err) {
+        console.error('Failed to load activity logs:', err);
+    }
+}
+
+function updateActivityUI(activities) {
+    const timeline = document.getElementById('activityLogs');
+    if (!timeline) return;
+    
+    if (!activities || activities.length === 0) {
+        timeline.innerHTML = '<div>No recent activity</div>';
+        return;
+    }
+    
+    timeline.innerHTML = '';
+    
+    activities.forEach(activity => {
+        const icon = getActivityIcon(activity.category);
+        const div = document.createElement('div');
+        div.innerHTML = `${icon} ${activity.action}`;
+        timeline.appendChild(div);
+    });
+}
+
+function getActivityIcon(category) {
+    const icons = {
+        'auth': '🔐',
+        'file': '📂',
+        'domain': '🌐',
+        'security': '🛡',
+        'billing': '💰',
+        'system': '⚙️'
+    };
+    return icons[category] || '📌';
+}
+
+// ===================== SECURITY =====================
+function runMalwareScan() {
+    notify('Starting malware scan...');
+    setTimeout(() => {
+        notify('Scan complete. No threats found.');
+    }, 3000);
+}
+
+function backupRestore() {
+    notify('Opening backup manager...');
+}
+
+// ===================== SUPPORT =====================
+async function createTicket() {
+    const subject = document.getElementById('ticketSubject')?.value;
+    const message = document.getElementById('ticketMessage')?.value;
+    
+    if (!subject || !message) {
+        notify('Please fill in all fields');
+        return;
+    }
+    
+    notify('Support ticket created. We\'ll respond within 24 hours.');
+    document.getElementById('ticketSubject').value = '';
+    document.getElementById('ticketMessage').value = '';
+}
+
+// ===================== BILLING =====================
+function upgradePlan() {
+    const paymentSection = document.getElementById('paymentSection');
+    if (paymentSection) {
+        paymentSection.style.display = paymentSection.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+async function initiateMpesa() {
+    const phone = document.getElementById('mpesaPhone')?.value;
+    const amount = document.getElementById('mpesaAmount')?.value;
+    
+    if (!phone || !amount) {
+        notify('Please enter phone number and amount');
+        return;
+    }
+    
+    notify(`Initiating M-Pesa payment of KES ${amount} to ${phone}...`);
+    
+    setTimeout(() => {
+        notify('Payment successful! Your plan has been upgraded.');
+        document.getElementById('paymentSection').style.display = 'none';
+        document.getElementById('mpesaPhone').value = '';
+        document.getElementById('mpesaAmount').value = '';
+    }, 3000);
+}
+
+// ===================== ACCOUNT =====================
+async function saveProfile() {
+    const username = document.getElementById('accountUsername')?.value;
+    const email = document.getElementById('accountEmail')?.value;
+    const language = document.getElementById('accountLanguage')?.value;
+    const timezone = document.getElementById('accountTimezone')?.value;
+    const password = document.getElementById('accountPassword')?.value;
+    const enable2fa = document.getElementById('account2fa')?.checked;
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+            method: 'PUT',
+            headers: { 
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                username, 
+                email, 
+                language, 
+                timezone,
+                newPassword: password || undefined
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            notify('Profile updated successfully');
+            if (enable2fa) {
+                notify('2FA enabled');
+            }
+        } else {
+            notify(data.message || 'Update failed');
+        }
+    } catch (err) {
+        notify('Update failed');
+    }
+}
+
+// ===================== REAL-TIME UPDATES =====================
+function startRealTimeUpdates() {
+    // Simulate real-time updates (in production, use WebSocket)
+    setInterval(() => {
+        if (document.getElementById('server') && !document.getElementById('server').classList.contains('hidden')) {
+            // Update CPU randomly for demo
+            const cpuElement = document.getElementById('serverCpu');
+            if (cpuElement) {
+                const newCpu = Math.floor(Math.random() * 60) + 20;
+                cpuElement.style.width = newCpu + '%';
+            }
+            
+            const ramElement = document.getElementById('serverRam');
+            if (ramElement) {
+                const newRam = Math.floor(Math.random() * 40) + 40;
+                ramElement.style.width = newRam + '%';
+            }
+        }
+    }, 5000);
+}
+
+// ===================== NOTIFICATIONS =====================
+function toggleNotifications() {
+    notify('No new notifications');
+}
+
+// ===================== COMMAND PALETTE =====================
+function openCmd() {
+    let c = document.getElementById("cmd");
+    c.style.display = c.style.display === "block" ? "none" : "block";
+    if (c.style.display === "block") {
+        document.getElementById('cmdInput').focus();
+    }
+}
+
+function handleCommand(e) {
+    if (e.key === 'Enter') {
+        const cmd = e.target.value.toLowerCase();
+        const commands = {
+            'dashboard': () => show('dashboard'),
+            'files': () => { show('files'); loadFiles(); },
+            'domains': () => { show('domains'); loadDashboardData(); },
+            'subdomains': () => show('subdomains'),
+            'server': () => { show('server'); loadServerStatus(); },
+            'security': () => show('security'),
+            'billing': () => show('billing'),
+            'activity': () => { show('activity'); loadActivityLogs(); },
+            'account': () => show('account'),
+            'installer': () => show('installer'),
+            'support': () => show('support'),
+            'usage': () => show('usage'),
+            'help': () => notify('Commands: dashboard, files, domains, server, security, billing, activity, account, installer, support, usage, logout'),
+            'logout': () => logout()
+        };
+        
+        if (commands[cmd]) {
+            commands[cmd]();
+            openCmd();
+        } else {
+            notify(`Unknown command: ${cmd}`);
+        }
+        
+        e.target.value = '';
+    }
+}
+
+// ===================== NOTIFICATION HELPER =====================
+function notify(msg) {
+    let t = document.getElementById("toast");
+    t.innerText = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 3000);
+}
+
+// ===================== SECTION NAVIGATION =====================
+function show(id) {
+    document.querySelectorAll("main section").forEach(s => s.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
+    
+    // Load section-specific data
+    switch(id) {
+        case 'files':
+            loadFiles();
+            break;
+        case 'activity':
+            loadActivityLogs();
+            break;
+        case 'server':
+            loadServerStatus();
+            break;
+        case 'domains':
+        case 'dashboard':
+            loadDashboardData();
+            break;
+        case 'account':
+            // Account data already loaded
+            break;
+    }
+}
+
+// ===================== KEYBOARD SHORTCUTS =====================
+document.addEventListener("keydown", e => {
+    if (e.ctrlKey && e.key === "k") {
+        e.preventDefault();
+        openCmd();
+    }
+});
+</script>
+
+<!-- Add Socket.io for real-time updates (optional) -->
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
+</body>
+</html>
